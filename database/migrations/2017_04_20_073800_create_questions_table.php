@@ -16,8 +16,8 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
-            $table->string('answer', 32);
-            $table->smallInteger('choice_cnt');
+            $table->string('answer', 8);
+            //$table->smallInteger('choice_cnt');
             $table->softDeletes();
             $table->timestamps();
         });

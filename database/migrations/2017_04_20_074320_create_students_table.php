@@ -23,6 +23,7 @@ class CreateStudentsTable extends Migration
             $table->string('tel', 16);
             $table->string('qq', 16);
             $table->integer('team_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

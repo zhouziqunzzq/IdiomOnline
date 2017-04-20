@@ -20,5 +20,11 @@ Route::get('/testpaper/single', function () {
 });
 
 Route::resource('/questions', 'QuestionController', ['only' => [
-    'index', 'show'
+    'index', 'show', 'store'
 ]]);
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('addQuestion', function ()    {
+        return view('admin.addQuestion');
+    });
+});
