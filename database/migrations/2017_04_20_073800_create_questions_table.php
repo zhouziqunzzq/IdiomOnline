@@ -17,6 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->string('answer', 32);
+            $table->smallInteger('choice_cnt');
             $table->softDeletes();
             $table->timestamps();
         });

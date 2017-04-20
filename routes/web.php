@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/testpaper/single', function () {
+    return view('testpaper');
+});
+
+Route::resource('/questions', 'QuestionController', ['only' => [
+    'index', 'show'
+]]);
