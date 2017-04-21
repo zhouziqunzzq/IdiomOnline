@@ -15,17 +15,23 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/testpaper/single', function () {
-    return view('testpaper');
-});
+Route::get('/exam/single', 'ExamController@startSingleExam');
 
 Route::resource('/questions', 'QuestionController', ['only' => [
     'index', 'show', 'store'
 ]]);
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@autoLogin');
+    Route::get('login', 'AdminController@autoLogin');
+    Route::post('login', 'AdminController@login');
+    Route::get('logout', 'AdminController@logout')->middleware('checkAdmin');
+    Route::get('index', function ()    {
+        return view('admin.index');
+    })->middleware('checkAdmin');
     Route::get('addQuestion', function ()    {
         return view('admin.addQuestion');
-    });
-    Route::get('showQuestion', 'AdminController@showQuestion');
+    })->middleware('checkAdmin');
+    Route::get('showQuestion', 'AdminController@showQuestion')
+        ->middleware('checkAdmin');
 });

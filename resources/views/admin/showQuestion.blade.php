@@ -8,7 +8,7 @@
         <div class="section no-pad-bot" id="index-banner">
             <div class="container">
                 <div class="row center">
-                    <h5 class="header col s12 light">共{{ $total }}题</h5>
+                    <h5 class="header col s12 light">共{{ count($questions) }}题</h5>
                 </div>
             </div>
         </div>

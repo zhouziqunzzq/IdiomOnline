@@ -41,9 +41,9 @@
                 </div>
                 <br/>
                 <div class="row center">
-                    <a href="/testpaper/single" id="download-button"
+                    <a href="/exam/single" id="download-button"
                        class="btn-large waves-effect waves-light blue col s4 offset-s1">单人参赛</a>
-                    <a href="/testpaper/team" id="download-button"
+                    <a href="/exam/team" id="download-button"
                        class="btn-large waves-effect waves-light blue col s4 offset-s2">组队参赛</a>
                 </div>
             </div>

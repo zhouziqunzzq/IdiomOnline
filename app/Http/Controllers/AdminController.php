@@ -7,6 +7,30 @@ use App\Question;
 
 class AdminController extends Controller
 {
+    public function autoLogin(Request $request)
+    {
+        if(!$request->session()->has('pwd') || $request->session()->get('pwd') != env('ADMIN_KEY'))
+            return view('/admin/login');
+        else
+            return view('/admin/index');
+    }
+    public function login(Request $request)
+    {
+        if($request->input('pwd') == env('ADMIN_KEY'))
+        {
+            $request->session()->put('pwd', env('ADMIN_KEY'));
+            return redirect('/admin/index');
+        }
+        else
+        {
+            return redirect('/admin/login');
+        }
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('pwd');
+        return redirect('/admin');
+    }
     public function showQuestion(Request $request)
     {
         $qs = Question::all();
@@ -20,7 +44,6 @@ class AdminController extends Controller
             $questions[] = $question;
         }
         return view('admin.showQuestion', [
-            'total' => count($qs),
             'questions' => $questions
         ]);
     }
