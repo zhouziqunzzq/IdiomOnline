@@ -2,17 +2,17 @@
 @section('myCss')
     <link href="/css/index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <style>
-        .timeCounter{
-            width:200px;
-            z-index:100px;
-            position:absolute;
-            right:20px;
+        .timeCounter {
+            width: 200px;
+            z-index: 100px;
+            position: absolute;
+            right: 20px;
             top: 40px;
-            float:right;
+            float: right;
             background-color: rgba(255, 255, 255, 0.5);
-            -webkit-border-radius:10px;
-            -moz-border-radius:10px;
-            border-radius:10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
         }
     </style>
 @endsection
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="container">
-            <form>
+            <form id="exam" action="/exam/judge" method="post" onsubmit="return validateForm();">
                 @for($i = 0; $i < count($questions); $i++)
                     @include('question', [
                         'id' => $i + 1,
@@ -48,6 +48,13 @@
                     ])
                 @endfor
                 {{ csrf_field() }}
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">交卷
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
         @include('footer')
@@ -56,7 +63,7 @@
 @section('myJs')
     <script>
         $(window).scroll(function () {
-            $("#timeCounter").css("top", $(document).scrollTop()+80 );
+            $("#timeCounter").css("top", $(document).scrollTop() + 80);
         });
         var timer;
         (function ($) {
@@ -64,13 +71,15 @@
 
                 $('.button-collapse').sideNav();
                 timer = setTimeout("countdown()", 1000);
-                $("#timeCounter").css("top", $(document).scrollTop()+80 );
+                $("#timeCounter").css("top", $(document).scrollTop() + 80);
             }); // end of document ready
         })(jQuery); // end of jQuery name space
         function countdown() {
             var nextTime = parseInt($('#countdown').html()) - 1;
             if (nextTime < 0) {
                 clearTimeout(timer);
+                alert('时间到，即将交卷...');
+                $("#exam").submit();
             }
             else {
                 $('#countdown').html(nextTime);
@@ -88,6 +97,14 @@
                 }
                 timer = setTimeout("countdown()", 1000);
             }
+        }
+        function validateForm()
+        {
+            if(parseInt($('#countdown').html()) == 0)
+                return true;
+            if($("input:checked").length != {{ count($questions) }})
+                return confirm('还有题目未作答，确认交卷吗？');
+            return true;
         }
     </script>
 @endsection

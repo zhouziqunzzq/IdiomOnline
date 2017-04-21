@@ -15,6 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
+            $table->smallInteger('count');
             $table->softDeletes();
             $table->timestamps();
         });

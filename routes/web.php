@@ -10,26 +10,41 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Index
 Route::get('/', function () {
     return view('index');
 });
-
+//Exam
 Route::get('/exam/single', 'ExamController@startSingleExam');
-
-Route::resource('/questions', 'QuestionController', ['only' => [
-    'index', 'show', 'store'
+Route::get('/exam/team', 'ExamController@startTeamExam');
+Route::post('/exam/judge', 'ExamController@judge');
+//Register
+/*Route::get('/reg', function () {
+    return view('register', [
+        'score' => 100,
+        'exam_type' => 'team'
+    ]);
+});*/
+Route::get('/finish', function () {
+    return view('finish');
+});
+Route::resource('/students', 'StudentController', ['only' => [
+    'store'
 ]]);
-
+//Question
+Route::resource('/questions', 'QuestionController', ['only' => [
+    'store'
+]]);
+//Admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@autoLogin');
     Route::get('login', 'AdminController@autoLogin');
     Route::post('login', 'AdminController@login');
     Route::get('logout', 'AdminController@logout')->middleware('checkAdmin');
-    Route::get('index', function ()    {
+    Route::get('index', function () {
         return view('admin.index');
     })->middleware('checkAdmin');
-    Route::get('addQuestion', function ()    {
+    Route::get('addQuestion', function () {
         return view('admin.addQuestion');
     })->middleware('checkAdmin');
     Route::get('showQuestion', 'AdminController@showQuestion')
