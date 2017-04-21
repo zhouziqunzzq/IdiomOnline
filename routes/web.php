@@ -18,13 +18,12 @@ Route::get('/', function () {
 Route::get('/exam/single', 'ExamController@startSingleExam');
 Route::get('/exam/team', 'ExamController@startTeamExam');
 Route::post('/exam/judge', 'ExamController@judge');
+//Team info
+Route::get('/teaminfo', function () {
+    return view('teaminfo');
+});
+Route::post('/teaminfo', 'StudentController@getTeamInfo');
 //Register
-/*Route::get('/reg', function () {
-    return view('register', [
-        'score' => 100,
-        'exam_type' => 'team'
-    ]);
-});*/
 Route::get('/finish', function () {
     return view('finish');
 });

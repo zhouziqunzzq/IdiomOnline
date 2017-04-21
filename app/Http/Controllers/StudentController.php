@@ -36,8 +36,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->session()->has('judge_status') || $request->session()->get('judge_status') == false)
-        {
+        if (!$request->session()->has('judge_status') || $request->session()->get('judge_status') == false) {
             $request->session()->flush();
             return response('Access denied.');
         }
@@ -150,5 +149,32 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getTeamInfo(Request $request)
+    {
+        $student_id = $request->input('student_id');
+        $name = $request->input('name');
+        $cnt = Student::where('student_id', $student_id)
+            ->where('name', $name)
+            ->count();
+        if ($cnt == 0)
+            return json_encode(array(
+                'result' => false,
+                'msg' => '用户名或密码错误'
+            ));
+        else
+        {
+            $s = Student::where('student_id', $student_id)
+                ->where('name', $name)
+                ->first();
+            return json_encode(array(
+                'result' => true,
+                'data' => array(
+                    'students' => $s->team->students,
+                    'team_id' => $s->team->id
+                )
+            ));
+        }
     }
 }
