@@ -27,4 +27,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('addQuestion', function ()    {
         return view('admin.addQuestion');
     });
+    Route::get('showQuestion', 'AdminController@showQuestion');
 });
