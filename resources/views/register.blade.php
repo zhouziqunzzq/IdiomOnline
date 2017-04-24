@@ -109,7 +109,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s8 offset-s2">
-                            <select name="school">
+                            <select name="school2">
                                 <option value="" disabled selected>请选择学院...</option>
                                 <option value="文法学院">文法学院</option>
                                 <option value="马克思主义学院">马克思主义学院</option>
