@@ -64,7 +64,7 @@
                             <option value="信息科学与工程学院">信息科学与工程学院</option>
                             <option value="计算机科学与工程学院">计算机科学与工程学院</option>
                             <option value="软件学院">软件学院</option>
-                            <option value="中和生物医学与信息工程学院">中和生物医学与信息工程学院</option>
+                            <option value="中荷生物医学与信息工程学院">中荷生物医学与信息工程学院</option>
                             <option value="生命健康与科学学院">生命健康与科学学院</option>
                             <option value="江河建筑学院">江河建筑学院</option>
                             <option value="国防教育学院">国防教育学院</option>
@@ -124,7 +124,7 @@
                                 <option value="信息科学与工程学院">信息科学与工程学院</option>
                                 <option value="计算机科学与工程学院">计算机科学与工程学院</option>
                                 <option value="软件学院">软件学院</option>
-                                <option value="中和生物医学与信息工程学院">中和生物医学与信息工程学院</option>
+                                <option value="中荷生物医学与信息工程学院">中荷生物医学与信息工程学院</option>
                                 <option value="生命健康与科学学院">生命健康与科学学院</option>
                                 <option value="江河建筑学院">江河建筑学院</option>
                                 <option value="国防教育学院">国防教育学院</option>
