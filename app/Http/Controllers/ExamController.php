@@ -36,7 +36,7 @@ class ExamController extends Controller
 
     public function startSingleExam(Request $request)
     {
-        if (env('ENABLE_EXAM') == 'false')
+        if (env('ENABLE_EXAM') == false)
             return response("报名已结束");
         else {
             $data = $this->getRandomQuestions(15);
@@ -53,7 +53,7 @@ class ExamController extends Controller
 
     public function startTeamExam(Request $request)
     {
-        if (env('ENABLE_EXAM') == 'false')
+        if (env('ENABLE_EXAM') == false)
             return response("报名已结束");
         else {
             $data = $this->getRandomQuestions(30);
