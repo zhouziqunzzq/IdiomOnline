@@ -19,6 +19,9 @@
                 <a class="waves-effect waves-light btn col s12 m4 offset-m4" href="/admin/showQuestion">查看考题</a>
             </div>
             <div class="row">
+                <a class="waves-effect waves-light btn col s12 m4 offset-m4" href="/admin/adjustTeam">调整队伍</a>
+            </div>
+            <div class="row">
                 <a class="waves-effect waves-light btn col s12 m4 offset-m4 red" href="/admin/logout">注销</a>
             </div>
         </div>

@@ -48,4 +48,5 @@ Route::group(['prefix' => 'admin'], function () {
     })->middleware('checkAdmin');
     Route::get('showQuestion', 'AdminController@showQuestion')
         ->middleware('checkAdmin');
+    Route::get('adjustTeam', 'AdminController@adjustTeam');
 });
