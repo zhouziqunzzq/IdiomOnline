@@ -36,28 +36,36 @@ class ExamController extends Controller
 
     public function startSingleExam(Request $request)
     {
-        $data = $this->getRandomQuestions(15);
-        $request->session()->put('answers', json_encode($data['answers']));
-        $request->session()->put('start_time', time());
-        $request->session()->put('exam_type', 'single');
-        return view('exam', [
-            'timeLimit' => 600,
-            'total' => count($data['questions']),
-            'questions' => $data['questions']
-        ]);
+        if (env('ENABLE_EXAM') == 'false')
+            return response("报名已结束");
+        else {
+            $data = $this->getRandomQuestions(15);
+            $request->session()->put('answers', json_encode($data['answers']));
+            $request->session()->put('start_time', time());
+            $request->session()->put('exam_type', 'single');
+            return view('exam', [
+                'timeLimit' => 600,
+                'total' => count($data['questions']),
+                'questions' => $data['questions']
+            ]);
+        }
     }
 
     public function startTeamExam(Request $request)
     {
-        $data = $this->getRandomQuestions(30);
-        $request->session()->put('answers', json_encode($data['answers']));
-        $request->session()->put('start_time', time());
-        $request->session()->put('exam_type', 'team');
-        return view('exam', [
-            'timeLimit' => 600,
-            'total' => count($data['questions']),
-            'questions' => $data['questions']
-        ]);
+        if (env('ENABLE_EXAM') == 'false')
+            return response("报名已结束");
+        else {
+            $data = $this->getRandomQuestions(30);
+            $request->session()->put('answers', json_encode($data['answers']));
+            $request->session()->put('start_time', time());
+            $request->session()->put('exam_type', 'team');
+            return view('exam', [
+                'timeLimit' => 600,
+                'total' => count($data['questions']),
+                'questions' => $data['questions']
+            ]);
+        }
     }
 
     public function judge(Request $request)
