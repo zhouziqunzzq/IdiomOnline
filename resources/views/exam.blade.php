@@ -4,7 +4,7 @@
     <style>
         .timeCounter {
             width: 200px;
-            z-index: 100px;
+            z-index: 100;
             position: absolute;
             right: 20px;
             top: 40px;

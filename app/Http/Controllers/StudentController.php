@@ -53,8 +53,30 @@ class StudentController extends Controller
                 $s->qq = $request->input('qq1');
                 $s->team_id = -1;
                 $s->save();
-                //Find a single-student team
-                $ts = Team::where('count', '1')->get();
+                //Find a single-student team in the same region
+                $nh = ['外国语学院', '艺术学院', '理学院', '资源与土木工程学院', '冶金学院',
+                    '材料科学与工程学院', '机械工程与自动化学院', '信息科学与工程学院', '国防教育学院',
+                    '体育部'];
+                $hn = ['文法学院', '马克思主义学院', '工商管理学院', '计算机科学与工程学院',
+                    '软件学院', '生命健康与科学学院', '江河建筑学院', '中荷生物医学与信息工程学院'];
+                $ts = null;
+                if (in_array($s->school, $nh)) {
+                    // Find a single-student team in NanHu
+                    $ts = Team::whereHas('students', function ($query) use ($nh) {
+                        $query->whereIn('school', $nh);
+                    })
+                        ->where('count', '1')
+                        ->get();
+                } else if (in_array($s->school, $hn)) {
+                    // Find a single-student team in HunNan
+                    $ts = Team::whereHas('students', function ($query) use ($hn) {
+                        $query->whereIn('school', $hn);
+                        })
+                        ->where('count', '1')
+                        ->get();
+                } else {
+                    return response("", 500);
+                }
                 if (count($ts) == 0) {
                     //Create new team
                     $t = new Team();
@@ -64,7 +86,7 @@ class StudentController extends Controller
                     $s->team_id = $t->id;
                     $s->save();
                 } else {
-                    //Assign student to random team
+                    //Assign student to random team in the same region
                     $t_id = rand(0, count($ts) - 1);
                     $t = $ts[$t_id];
                     $s->team_id = $t->id;
@@ -163,8 +185,7 @@ class StudentController extends Controller
                 'result' => false,
                 'msg' => '用户名或密码错误'
             ));
-        else
-        {
+        else {
             $s = Student::where('student_id', $student_id)
                 ->where('name', $name)
                 ->first();
