@@ -1,6 +1,17 @@
 <div class="row">
     <div class="col s12">
-        <h4>{{ $id }}.</h4>
+        <h4>
+            {{ $id }}.
+            @if (isset($type))
+                @if ($type == 1)
+                    （成语题）
+                @elseif ($type == 2)
+                    （诗词题）
+                @elseif ($type == 3)
+                    （汉字题）
+                @endif
+            @endif
+        </h4>
         <p>
             {!! $content !!}
         </p>

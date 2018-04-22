@@ -36,16 +36,21 @@ class AdminController extends Controller
     public function showQuestion(Request $request)
     {
         $qs = Question::all();
+        $count1 = Question::where('type', 1)->count();
+        $count2 = Question::where('type', 2)->count();
+        $count3 = Question::where('type', 3)->count();
         $questions = array();
         foreach ($qs as $q) {
             $fq = $q->getFormatted();
             $question['content'] = $fq['content'];
             $question['choices'] = $fq['choices'];
             $question['answer'] = $q->answer;
+            $question['type'] = $q->type;
             $questions[] = $question;
         }
         return view('admin.showQuestion', [
-            'questions' => $questions
+            'questions' => $questions,
+            'count' => [$count1, $count2, $count3]
         ]);
     }
 

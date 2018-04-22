@@ -9,6 +9,7 @@
             <div class="container">
                 <div class="row center">
                     <h5 class="header col s12 light">共{{ count($questions) }}题</h5>
+                    <h5>成语{{ $count[0] }}题，诗词{{ $count[1] }}题，汉字{{ $count[2] }}题</h5>
                 </div>
             </div>
         </div>
@@ -19,7 +20,8 @@
                         'id' => $i + 1,
                         'content' => $questions[$i]['content'],
                         'choices' => $questions[$i]['choices'],
-                        'answer' => $questions[$i]['answer']
+                        'answer' => $questions[$i]['answer'],
+                        'type' => $questions[$i]['type']
                     ])
                 @endfor
                 {{ csrf_field() }}

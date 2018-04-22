@@ -17,7 +17,7 @@
                     <div class="input-field col s12">
                         <select name="type" id="type" class="materialize-select">
                             <option value="1" selected>成语题</option>
-                            <option value="2">传统文化题</option>
+                            <option value="2">诗词题</option>
                             <option value="3">汉字题</option>
                         </select>
                         <label for="type" class="black-text">题目类型</label>
