@@ -20,10 +20,6 @@
                             <p class="center-align"><i class="material-icons">done</i>
                                 恭喜，您答对了{{ $score }}题，成功晋级！请认真填写信息进行注册。</p>
                         </div>
-                        {{--<div class="card-action">
-                            <a href="#">这是一个链接</a>
-                            <a href="#">这是一个链接</a>
-                        </div>--}}
                     </div>
                 </div>
             </div>

@@ -52,6 +52,7 @@ class StudentController extends Controller
                 $s->tel = $request->input('tel1');
                 $s->qq = $request->input('qq1');
                 $s->team_id = -1;
+                $s->type = 1;   // 单人参赛
                 $s->save();
                 //Find a single-student team in the same region
                 $nh = ['外国语学院', '艺术学院', '理学院', '资源与土木工程学院', '冶金学院',
@@ -71,7 +72,7 @@ class StudentController extends Controller
                     // Find a single-student team in HunNan
                     $ts = Team::whereHas('students', function ($query) use ($hn) {
                         $query->whereIn('school', $hn);
-                        })
+                    })
                         ->where('count', '1')
                         ->get();
                 } else {
@@ -112,6 +113,7 @@ class StudentController extends Controller
                 $s1->tel = $request->input('tel1');
                 $s1->qq = $request->input('qq1');
                 $s1->team_id = $t->id;
+                $s1->type = 2;  // 组队参赛
                 $s1->save();
                 $s2 = new Student();
                 $s2->student_id = $request->input('student_id2');
@@ -120,6 +122,7 @@ class StudentController extends Controller
                 $s2->tel = $request->input('tel2');
                 $s2->qq = $request->input('qq2');
                 $s2->team_id = $t->id;
+                $s2->type = 2;  // 组队参赛
                 $s2->save();
                 break;
         }

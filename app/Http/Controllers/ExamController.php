@@ -7,12 +7,15 @@ use App\Question;
 
 class ExamController extends Controller
 {
-    public function getRandomQuestions($count)
+    public function getRandomQuestionsByType($count, $type)
     {
-        $qs = Question::all();
+        $qs = Question::where('type', $type)->get();
         $total = count($qs);
         if ($count > $total)
-            return response(500);
+            return array(
+                'questions' => [],
+                'answers' => []
+            );
         $indexes = array();
         for ($i = 0; $i < $total; $i++)
             $indexes[] = $i;
@@ -29,6 +32,23 @@ class ExamController extends Controller
         );
     }
 
+    public function getRandomQuestionsAllByRatio($count) {
+        // Calculate questions count by ratio for different type
+        $count1 = floor(floatval(env('QUESTION_1_RATIO')) * $count);
+        $count2 = floor(floatval(env('QUESTION_2_RATIO')) * $count);
+        $count3 = $count - $count1 - $count2;
+        // Get random questions for different type
+        $qs1 = $this->getRandomQuestionsByType($count1, 1);
+        $qs2 = $this->getRandomQuestionsByType($count2, 2);
+        $qs3 = $this->getRandomQuestionsByType($count3, 3);
+        // Put questions all together
+        return array(
+            'questions' => array_merge($qs1['questions'], $qs2['questions'], $qs3['questions']),
+            'answers' => array_merge($qs1['answers'], $qs2['answers'], $qs3['answers']),
+            'count' => [$count1, $count2, $count3]
+        );
+    }
+
     public function setTimestamp(Request $request)
     {
         $request->session()->put('start_time', time());
@@ -39,14 +59,15 @@ class ExamController extends Controller
         if (env('ENABLE_EXAM') == false)
             return response("报名已结束");
         else {
-            $data = $this->getRandomQuestions(15);
+            $data = $this->getRandomQuestionsAllByRatio(15);
             $request->session()->put('answers', json_encode($data['answers']));
             $request->session()->put('start_time', time());
             $request->session()->put('exam_type', 'single');
             return view('exam', [
                 'timeLimit' => 600,
                 'total' => count($data['questions']),
-                'questions' => $data['questions']
+                'questions' => $data['questions'],
+                'count' => $data['count']
             ]);
         }
     }
@@ -56,7 +77,7 @@ class ExamController extends Controller
         if (env('ENABLE_EXAM') == false)
             return response("报名已结束");
         else {
-            $data = $this->getRandomQuestions(30);
+            $data = $this->getRandomQuestionsAllByRatio(30);
             $request->session()->put('answers', json_encode($data['answers']));
             $request->session()->put('start_time', time());
             $request->session()->put('exam_type', 'team');

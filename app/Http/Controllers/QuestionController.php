@@ -56,6 +56,7 @@ class QuestionController extends Controller
                     $q = new Question();
                     $q->content = $questions[$i];
                     $q->answer = $answers[$i];
+                    $q->type = intval($request->input('type'));
                     $q->save();
                 }
             }
