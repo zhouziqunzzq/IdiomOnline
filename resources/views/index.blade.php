@@ -8,7 +8,7 @@
         <div class="section no-pad-bot" id="index-banner">
             <div class="container">
                 <br><br>
-                <h2 class="header center blue-text text-darken-3">欢迎步入成语的世界</h2>
+                <h2 class="header center blue-text text-darken-3">欢迎步入传统文化的世界</h2>
                 <div class="row center">
                     <h5 class="header col s12 light">请选择参赛方式：</h5>
                 </div>
@@ -24,8 +24,7 @@
                             <h5 class="center">单人参赛</h5>
                             <p class="light">
                                 <strong class="orange-text text-darken-3">总共15道题，您需要答对10道题及以上才可晋级。</strong>
-                                成功晋级后，系统将为您随机分配一支队伍，队伍分配结果可在初赛结束后使用学号和姓名
-                                登陆本系统查询。</p>
+                                成功晋级后，您需要填写自己的信息。</p>
                         </div>
                     </div>
                     <div class="col s12 m6">
