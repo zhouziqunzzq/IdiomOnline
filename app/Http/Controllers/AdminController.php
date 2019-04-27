@@ -45,6 +45,7 @@ class AdminController extends Controller
             $question['content'] = $fq['content'];
             $question['choices'] = $fq['choices'];
             $question['answer'] = $q->answer;
+            $question['id'] = $q->id;
             $question['type'] = $fq['type'];
             $questions[] = $question;
         }

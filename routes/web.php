@@ -32,7 +32,7 @@ Route::resource('/students', 'StudentController', ['only' => [
 ]]);
 //Question
 Route::resource('/questions', 'QuestionController', ['only' => [
-    'store'
+    'store', 'destroy'
 ]]);
 //Admin
 Route::group(['prefix' => 'admin'], function () {

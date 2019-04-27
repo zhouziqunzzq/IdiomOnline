@@ -107,6 +107,28 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rst = Question::destroy($id);
+        if ($rst > 0) {
+            return json_encode([
+                "code" => 200,
+                "result" => true,
+                "msg" => "ok",
+                "data" => [
+                    "id" => $id,
+                    "rst" => $rst,
+                ],
+            ]);
+        } else {
+            return json_encode([
+                "code" => 500,
+                "result" => false,
+                "msg" => "删除失败",
+                "data" => [
+                    "id" => $id,
+                    "rst" => $rst,
+                ],
+            ]);
+        }
+
     }
 }
