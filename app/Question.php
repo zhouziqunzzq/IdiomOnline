@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    public function getFormatted($text='')
+    public function getFormatted($text = '')
     {
         if (!isset($text) || $text == '')
             $text = $this->content;
@@ -27,8 +27,9 @@ class Question extends Model
         }
         //return formatted array
         return array(
+            'type' => config('question.alias')[intval($this->type) - 1],
             'content' => $content,
-            'choices' => $choices
+            'choices' => $choices,
         );
     }
 }

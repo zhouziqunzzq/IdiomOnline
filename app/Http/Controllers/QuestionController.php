@@ -30,29 +30,30 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if(!$request->session()->has('pwd') || $request->session()->get('pwd') != env('ADMIN_KEY'))
+        if (!$request->session()->has('pwd') || $request->session()->get('pwd') != env('ADMIN_KEY'))
             return response('Access denied.');
-        else
-        {
+        else {
             $text = trim($request->input('questions'));
-            if(strpos($text, "\r\n\r\n") !== false)
+            if (strpos($text, "\r\n\r\n") !== false)
                 $questions = explode("\r\n\r\n", $text);
             else
                 $questions = explode("\n\n", $text);
 
-            $answers = $request->input('answers');
+            $answers = preg_replace('/\s+/', '', $request->input('answers'));
             //return json_encode(count($answers));
-            if(count($questions) != strlen($answers))
-                return response('问题和答案数量不匹配，请仔细检查！');
-            else
-            {
-                for($i = 0; $i < count($questions); $i++)
-                {
+            if (count($questions) != strlen($answers))
+                return response(
+                    '题面和答案数量不匹配，请仔细检查！<br/>' .
+                    '题面数量：' . count($questions) . '<br/>' .
+                    '答案数量：' . strlen($answers)
+                );
+            else {
+                for ($i = 0; $i < count($questions); $i++) {
                     $q = new Question();
                     $q->content = $questions[$i];
                     $q->answer = $answers[$i];
@@ -67,7 +68,7 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -78,7 +79,7 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -89,8 +90,8 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -101,7 +102,7 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

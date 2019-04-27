@@ -16,9 +16,13 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <select name="type" id="type" class="materialize-select">
-                            <option value="1" selected>成语题</option>
-                            <option value="2">诗词题</option>
-                            <option value="3">汉字题</option>
+                            @foreach (config('question.alias') as $alias)
+                                @if ($loop->first)
+                                    <option value="{{ $loop->index + 1 }}" selected>{{ $alias }}</option>
+                                @else
+                                    <option value="{{ $loop->index + 1 }}">{{ $alias }}</option>
+                                @endif
+                            @endforeach
                         </select>
                         <label for="type" class="black-text">题目类型</label>
                     </div>

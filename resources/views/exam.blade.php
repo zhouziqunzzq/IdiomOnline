@@ -43,8 +43,9 @@
                 @for($i = 0; $i < count($questions); $i++)
                     @include('question', [
                         'id' => $i + 1,
+                        'type' => $questions[$i]['type'],
                         'content' => $questions[$i]['content'],
-                        'choices' => $questions[$i]['choices']
+                        'choices' => $questions[$i]['choices'],
                     ])
                 @endfor
                 {{ csrf_field() }}

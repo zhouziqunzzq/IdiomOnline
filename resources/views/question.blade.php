@@ -1,17 +1,8 @@
 <div class="row">
     <div class="col s12">
-        <h4>
-            {{ $id }}.
-            @if (isset($type))
-                @if ($type == 1)
-                    （成语题）
-                @elseif ($type == 2)
-                    （诗词题）
-                @elseif ($type == 3)
-                    （汉字题）
-                @endif
-            @endif
-        </h4>
+        <h5>
+            {{ $id }}. ({{$type}})
+        </h5>
         <p>
             {!! $content !!}
         </p>
@@ -24,7 +15,7 @@
                    type="radio" value="{{ chr(65 + $i) }}"
             @if (isset($answer))
                 {{ $answer ==  chr(65 + $i) ? ' checked="checked"' : ''}}
-            @endif
+                    @endif
             />
             <label for="{{ strval($id) . strval($i) }}" class="black-text">{!! $choices[$i] !!}</label>
         </div>

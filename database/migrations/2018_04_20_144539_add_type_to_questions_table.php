@@ -13,7 +13,6 @@ class AddTypeToQuestionsTable extends Migration
      */
     public function up()
     {
-        // 1 - 成语题  2 - 传统文化题  3 - 汉字题
         Schema::table('questions', function (Blueprint $table) {
             $table->integer('type')->default(1);
         });

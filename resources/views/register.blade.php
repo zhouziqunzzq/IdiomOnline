@@ -47,25 +47,9 @@
                     <div class="input-field col s8 offset-s2">
                         <select name="school1">
                             <option value="" disabled selected>请选择学院...</option>
-                            <option value="文法学院">文法学院</option>
-                            <option value="马克思主义学院">马克思主义学院</option>
-                            <option value="外国语学院">外国语学院</option>
-                            <option value="艺术学院">艺术学院</option>
-                            <option value="工商管理学院">工商管理学院</option>
-                            <option value="理学院">理学院</option>
-                            <option value="资源与土木工程学院">资源与土木工程学院</option>
-                            <option value="冶金学院">冶金学院</option>
-                            <option value="材料科学与工程学院">材料科学与工程学院</option>
-                            <option value="机械工程与自动化学院">机械工程与自动化学院</option>
-                            <option value="信息科学与工程学院">信息科学与工程学院</option>
-                            <option value="计算机科学与工程学院">计算机科学与工程学院</option>
-                            <option value="机器人科学与工程学院">机器人科学与工程学院</option>
-                            <option value="软件学院">软件学院</option>
-                            <option value="中荷生物医学与信息工程学院">中荷生物医学与信息工程学院</option>
-                            <option value="生命健康与科学学院">生命健康与科学学院</option>
-                            <option value="江河建筑学院">江河建筑学院</option>
-                            <option value="国防教育学院">国防教育学院</option>
-                            <option value="体育部">体育部</option>
+                            @foreach ($schools as $school)
+                                <option value="{{ $school }}">{{ $school }}</option>
+                            @endforeach
                         </select>
                         <label>学院</label>
                     </div>
@@ -175,7 +159,7 @@
             $('form :input').each(function () {
                 //console.log($(this).attr('name') + '   ' + $(this).val());
                 if ($(this).attr('name') != 'action' &&
-                    ( $(this).val() == '' || $(this).val() == null))
+                    ($(this).val() == '' || $(this).val() == null))
                     flag = false;
             });
             if (!flag) {

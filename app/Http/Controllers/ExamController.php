@@ -32,10 +32,13 @@ class ExamController extends Controller
         );
     }
 
-    public function getRandomQuestionsAllByRatio($count) {
+    public function getRandomQuestionsAllByRatio($count)
+    {
         // Calculate questions count by ratio for different type
-        $count1 = floor(floatval(env('QUESTION_1_RATIO')) * $count);
-        $count2 = floor(floatval(env('QUESTION_2_RATIO')) * $count);
+        $ratioList = config('question.ratio');
+        $count1 = floor(floatval($ratioList[0]) * $count);
+        $count2 = floor(floatval($ratioList[1]) * $count);
+//        $count3 = floor(floatval($ratioList[2]) * $count);
         $count3 = $count - $count1 - $count2;
         // Get random questions for different type
         $qs1 = $this->getRandomQuestionsByType($count1, 1);
@@ -121,7 +124,11 @@ class ExamController extends Controller
         if ($request->session()->get('judge_status'))
             return view('register', [
                 'score' => $score,
-                'exam_type' => $request->session()->get('exam_type')
+                'exam_type' => $request->session()->get('exam_type'),
+                'schools' => array_merge(
+                    config('school.nanhu'),
+                    config('school.hunnan')
+                )
             ]);
         else
             return view('thanks', [
